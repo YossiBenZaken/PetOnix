@@ -1,1 +1,31 @@
-<app-navbar></app-navbar> <router-outlet></router-outlet>
+<div class="pb-5">
+  <app-navbar></app-navbar>
+</div>
+<div class="pt-5 container">
+  <div class="card" *ngFor="let item of items | async">
+    <div class="d-flex mt-1 mb-1 flex-column">
+      <a href="{{ item.data.userID }}"
+        ><img src="{{ item.data.photo }}" class="userPhoto mt-2 mr-2 ml-2" />
+        {{ item.data.userName }}
+      </a>
+      <div
+        class="position-relative ml-5 mt-n3"
+        style="margin-left: 4rem !important; font-size: 12px;"
+      >
+        {{ item.data.date.seconds * 1000 | timeago }}
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-9">{{ item.data.message }}</div>
+      <div class="col-3">
+        <img src="{{ item.data.photoOfPet }}" class="imageOfPet" />
+      </div>
+    </div>
+    <div class="card-body">
+      {{ item.data.likes.length }}
+      <div class="dropdown-divider"></div>
+      <button type="button" (click)="like(item.id)">Like</button>
+    </div>
+  </div>
+</div>
+<router-outlet></router-outlet>
